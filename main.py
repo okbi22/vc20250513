@@ -22,4 +22,26 @@ mbti_data = {
     },
     "ISFJ": {
         "description": "🛡️ 수호자형 | 조용하고 성실하며 책임감이 강합니다.",
-        "best
+        "best_match": "ESTP 🕶️ 액션파 실용주의자",
+        "worst_match": "ENTP 🌪️ 변화무쌍한 도전자",
+        "color": "#74b9ff"
+    },
+    # 추가 MBTI 유형도 여기에 계속...
+}
+
+st.set_page_config(page_title="🌟 MBTI 궁합 백과", page_icon="🔮", layout="centered")
+
+st.title("🔮 MBTI 궁합 백과")
+st.markdown("당신의 **MBTI 유형**을 선택하면, 그 유형의 성격 특징과 ❤️잘 맞는/⚡상극인 유형을 알려드릴게요!")
+st.markdown("---")
+
+selected_mbti = st.selectbox("🌟 당신의 MBTI는?", list(mbti_data.keys()))
+
+if selected_mbti:
+    data = mbti_data[selected_mbti]
+    st.markdown(f"<div style='background-color:{data['color']}; padding:20px; border-radius:10px;'>"
+                f"<h2 style='color:white;'>🧬 {selected_mbti}</h2>"
+                f"<p style='color:white; font-size:18px;'>{data['description']}</p>"
+                f"<p style='color:white; font-size:20px;'>✅ 잘 맞는 유형: <b>{data['best_match']}</b></p>"
+                f"<p style='color:white; font-size:20px;'>❌ 상극 유형: <b>{data['worst_match']}</b></p>"
+                f"</div>", unsafe_allow_html=True)
