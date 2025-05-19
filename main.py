@@ -52,4 +52,36 @@ colored_header(
 
 # MBTI 유형 선택
 selected_mbti = st.selectbox(
-    "당신의 MBTI 유형을 선택
+    "당신의 MBTI 유형을 선택하세요:",
+    options=list(mbti_features.keys()),
+)
+
+if selected_mbti:
+    colored_header(
+        label=f"✨ {selected_mbti} 유형의 특징 ✨",
+        description=mbti_features[selected_mbti],
+        color_name="blue-60",
+    )
+
+    compatibility = mbti_compatibility.get(selected_mbti, {})
+    best_match = ", ".join(compatibility.get("best", []))
+    worst_match = ", ".join(compatibility.get("worst", []))
+
+    colored_header(
+        label="🤝 나와 잘 맞는 유형 💖",
+        description=f"{selected_mbti} 유형과 가장 잘 맞는 유형은 {best_match} 입니다.",
+        color_name="green-60",
+    )
+
+    colored_header(
+        label="💔 나와 상극인 유형 💔",
+        description=f"{selected_mbti} 유형과 상극인 유형은 {worst_match} 입니다.",
+        color_name="red-70",
+    )
+
+    # 비오는 효과 (선택 사항)
+    if st.checkbox("화려함을 더해볼까요? ☔️"):
+        rain(emoji="✨", font_size=20, falling_speed=5, animation_length=1)
+
+st.markdown("---")
+st.markdown("Made with ❤️ by Streamlit & AI")
